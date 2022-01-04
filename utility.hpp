@@ -7,9 +7,9 @@
 #include "pixel.hpp"
 
 constexpr pixel to_pixel(const color& c) {
-    return {static_cast<unsigned char>(static_cast<int>(255.999*c[0])),
-            static_cast<unsigned char>(static_cast<int>(255.999*c[1])),
-            static_cast<unsigned char>(static_cast<int>(255.999*c[2]))};
+    return {static_cast<unsigned char>(static_cast<int>(255.999*c.r)),
+            static_cast<unsigned char>(static_cast<int>(255.999*c.g)),
+            static_cast<unsigned char>(static_cast<int>(255.999*c.b))};
 }
 
 constexpr pixel to_pixel(const double r, const double g, const double b) {

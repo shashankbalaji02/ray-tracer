@@ -21,21 +21,21 @@ constexpr double hit_sphere(const point3& center, double radius, const ray& r) {
 }
 
 constexpr color get_color(const ray& r) {
-    auto t = hit_sphere(point3(0,0,1.5), 0.5, r);
+    auto t = hit_sphere(point3(0, 0, 1.5), 0.5, r);
     if (t > 0.0) {
-        vec3 N = unit_vector(r.at(t) - vec3(0,0,-1));
-        return 0.5*color(N[0]+1, N[1]+1, N[2]+1);
+        vec3 N = unit_vector(r.at(t) - vec3(0, 0, -1));
+        return 0.5*color(N.x + 1, N.y + 1, N.z + 1);
     }
     vec3 unit_direction = unit_vector(r.direction);
-    t = 0.5*(unit_direction[1] + 1.0);
-    return (1.0-t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0);
+    t = 0.5*(unit_direction.y + 1.0);
+    return (1 - t)*color(1, 1, 1) + t*color(0.5, 0.7, 1);
 }
 
 int main() {
     constexpr std::size_t width = 1024;
     constexpr double aspect_ratio = 16.0/9;
     constexpr std::size_t height = static_cast<std::size_t>(width/aspect_ratio);
-    constexpr camera c{2, aspect_ratio, 1};
+    constexpr camera c{2*aspect_ratio, aspect_ratio, 1};
     /*constexpr*/ auto buffer = c.render<width, height>(get_color);
     std::cout << "P3\n" << width << ' ' << height << "\n255\n";
     print_buffer(std::cout, buffer);
